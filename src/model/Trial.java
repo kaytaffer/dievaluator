@@ -27,8 +27,13 @@ public class Trial {
      */
     public int[] recordThrow(){
         int[] newThrow = new int[sidesOnDie];
+        int diceLeftToRecord = amountOfDice;
         for (int i = 0; i < sidesOnDie; i++) {
-            newThrow[i] = controller.requestAmountOfOutcome(i+1);
+            int outcomeAmount = controller.requestAmountOfOutcome(i+1);
+            newThrow[i] = outcomeAmount;
+            diceLeftToRecord = diceLeftToRecord - outcomeAmount;
+            if (diceLeftToRecord < 1)
+                break;
         }
         return newThrow;
     }
