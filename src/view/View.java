@@ -1,6 +1,5 @@
 package view;
 import controller.Controller;
-
 import java.util.Scanner;
 
 /**
@@ -8,6 +7,7 @@ import java.util.Scanner;
  */
 public class View {
     private final Scanner input;
+    private final Controller controller;
 
     /**
      * Creates an instance of the View UI.
@@ -15,7 +15,8 @@ public class View {
      *                   //TODO code to allow interrupts
      */
     public View(Controller controller){
-        present();
+        this.controller = controller;
+        presentProgram();
         input = new Scanner(System.in);
     }
 
@@ -25,6 +26,46 @@ public class View {
      */
     public int howManyDice() {
         System.out.println("How many dice are you rolling each time? ");
+        return Integer.parseInt(input.nextLine());
+    }
+
+    /**
+     * Presents the user with the basic options available to them and passes on their choice to the <code>Controller</code>.
+     */
+    public boolean showUserOptions() {
+        int optionNumber = 0;
+        System.out.println();
+        System.out.println("What would you like to do next? \n" +
+                ++optionNumber + ". Record a roll. \n" +
+                ++optionNumber + ". Present results of the trial. \n" +
+                ++optionNumber + ". Start entirely new trial. \n" +
+                ++optionNumber + ". Exit.");
+        int choice = Integer.parseInt(input.nextLine());
+        switch (choice) {
+            case 1:
+                controller.throwDice();
+                break;
+            case 2:
+                //TODO
+                break;
+            case 3:
+                controller.newTrial();
+                break;
+            case 4:
+                return false;
+            default:
+                System.out.println("That was not a valid option.");
+        }
+        return true;
+    }
+
+    /**
+     * Prompts the user for the amount of dice showing a particular result.
+     * @param face the side of the dice currently asked for.
+     * @return the amount counted and entered by the user.
+     */
+    public int numberOfFace(int face){
+        System.out.println("How many " + face + "'s were rolled? ");
         return input.nextInt();
     }
 
@@ -36,9 +77,8 @@ public class View {
     }
 
     //presents the usage of the program to the user.
-    private void present() {
-        System.out.println("This program asks you to roll an amount (which you decide on) of six-sided dice to try" +
+    private void presentProgram() {
+        System.out.println("This program asks you to roll an amount (which you decide) of six-sided dice to try " +
                 "and determine if they as a group are fairly balanced.\n");
     }
-
 }

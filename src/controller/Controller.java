@@ -18,6 +18,10 @@ public class Controller {
         trial = new Trial(this, view.howManyDice());
     }
 
+    public void runView() {
+        while(view.showUserOptions()) ;
+    }
+
     /**
      * Starts a fresh <code>Trial</code> and sets it as the current one.
      */
@@ -26,13 +30,20 @@ public class Controller {
     }
 
     /**
-     * TODO fix a nice definition
-     * @param side the side of the dice currently asked for.
+     * TODO
+     */
+    public void throwDice() {
+        int[] newRecordedThrow = trial.recordThrow();
+        //TODO save throw or execute math and save
+    }
+
+    /**
+     * Calls the <code>View</code> to prompt the user for the amount of dice showing a particular result.
+     * @param face the side of the dice currently asked for.
      * @return the inputted value.
      */
-    public int requestAmountOfOutcome(int side) {
-        /* TODO call view and request from user the the amount of 1's, 2's etc shown*/
-        return 1;
+    public int requestAmountOfOutcome(int face) {
+        return view.numberOfFace(face);
     }
 
     /**
