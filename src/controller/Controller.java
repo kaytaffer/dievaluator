@@ -39,8 +39,7 @@ public class Controller {
      * Tasks the <code>Trial</code> to record the results of a new dice throw.
      */
     public void throwDice() {
-        int[] newRecordedThrow = trial.recordThrow();
-        trial.saveToModel(newRecordedThrow);
+        trial.recordThrow();
     }
 
     /**

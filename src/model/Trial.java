@@ -28,7 +28,7 @@ public class Trial {
      * @return an array of length corresponding to the number of sides on the dice with a record of how many
      * 1's, 2's, etc. were rolled in this throw.
      */
-    public int[] recordThrow(){
+    public void recordThrow(){
         int[] newThrow = new int[sidesOnDie];
         int diceLeftToRecord = amountOfDice;
         for (int i = 0; i < sidesOnDie; i++) {
@@ -38,21 +38,21 @@ public class Trial {
             if (diceLeftToRecord <= 0)
                 break;
         }
-        return newThrow;
+        saveToModel(newThrow);
     }
 
-    /**
+    /*
      * Records the thrown results into the state of model.
      * @param throwToSave array with length equalling the number of sides on a die, and the amount of outcomes
      *                    for each side.
      */
-    public void saveToModel(int[] throwToSave) {
+    private void saveToModel(int[] throwToSave) {
         for (int i = 0; i < sidesOnDie; i++)
             savedInput[i] = savedInput[i] + throwToSave[i];
     }
 
     /**
-     *
+     * //TODO
      * @return A Data Transfer Object containing the resulting mathematical output of a <code>Trial</code>. If the state
      * has recorded nothing thus far the DTO contains only null values.
      */
