@@ -18,8 +18,13 @@ public class Controller {
         trial = new Trial(this, view.howManyDice());
     }
 
+    /**
+     * Continually asks <code>View</code> to prompt the user with their options.
+     */
     public void runView() {
-        while(view.showUserOptions()) ;
+        boolean viewRunning = true;
+        while(viewRunning)
+            viewRunning = view.showUserOptions();
     }
 
     /**
@@ -30,11 +35,11 @@ public class Controller {
     }
 
     /**
-     * TODO
+     * Tasks the <code>Trial</code> to record the results of a new dice throw.
      */
     public void throwDice() {
         int[] newRecordedThrow = trial.recordThrow();
-        //TODO save throw or execute math and save
+        trial.saveToModel(newRecordedThrow);
     }
 
     /**

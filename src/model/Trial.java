@@ -9,6 +9,7 @@ public class Trial {
     private final int amountOfDice;
     private final int sidesOnDie = 6; //TODO option: allow for multiple types of dice beyond d6's through overloaded constructor
     private final Controller controller;
+    private int[] savedInput; //state of amount of each side of die rolled.
 
     /**
      * Creates an instance of a dice trial.
@@ -18,6 +19,7 @@ public class Trial {
     public Trial(Controller controller, int amountOfDice) {
         this.controller = controller;
         this.amountOfDice = amountOfDice;
+        this.savedInput = new int[sidesOnDie];
     }
 
     /**
@@ -36,6 +38,16 @@ public class Trial {
                 break;
         }
         return newThrow;
+    }
+
+    /**
+     * Records the thrown results into the state of model.
+     * @param throwToSave array with length equalling the number of sides on a die, and the amount of outcomes
+     *                    for each side.
+     */
+    public void saveToModel(int[] throwToSave) {
+        for (int sideOfDie : throwToSave)
+            savedInput[sideOfDie] = savedInput[sideOfDie] + throwToSave[sideOfDie];
     }
 
 }
