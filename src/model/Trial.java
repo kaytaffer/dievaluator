@@ -34,7 +34,7 @@ public class Trial {
             int outcomeAmount = controller.requestAmountOfOutcome(i+1);
             newThrow[i] = outcomeAmount;
             diceLeftToRecord = diceLeftToRecord - outcomeAmount;
-            if (diceLeftToRecord < 1)
+            if (diceLeftToRecord <= 0)
                 break;
         }
         return newThrow;
@@ -46,8 +46,8 @@ public class Trial {
      *                    for each side.
      */
     public void saveToModel(int[] throwToSave) {
-        for (int sideOfDie : throwToSave)
-            savedInput[sideOfDie] = savedInput[sideOfDie] + throwToSave[sideOfDie];
+        for (int i = 0; i < sidesOnDie; i++)
+            savedInput[i] = savedInput[i] + throwToSave[i];
     }
 
 }

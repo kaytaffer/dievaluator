@@ -40,7 +40,7 @@ public class View {
                 ++optionNumber + ". Present results of the trial. \n" +
                 ++optionNumber + ". Start entirely new trial. \n" +
                 ++optionNumber + ". Exit.");
-        int choice = Integer.parseInt(input.nextLine());
+        int choice = input.nextInt();
         switch (choice) {
             case 1:
                 controller.throwDice();
