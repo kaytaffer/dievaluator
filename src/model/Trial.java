@@ -1,6 +1,7 @@
 package model;
 
 import controller.Controller;
+import java.util.stream.IntStream;
 
 /**
  * Represents an ongoing trial to determine the fairness of a group of dice.
@@ -48,6 +49,18 @@ public class Trial {
     public void saveToModel(int[] throwToSave) {
         for (int i = 0; i < sidesOnDie; i++)
             savedInput[i] = savedInput[i] + throwToSave[i];
+    }
+
+    /**
+     *
+     * @return A Data Transfer Object containing the resulting mathematical output of a <code>Trial</code>. If the state
+     * has recorded nothing thus far the DTO contains only null values.
+     */
+    public StatisticsDTO assembleStatistics() {
+        int sum = IntStream.of(savedInput).sum();
+        if (sum == 0)
+            return new StatisticsDTO(sum);
+        else return new StatisticsDTO(0); //TODO Actually build a useful DTO
     }
 
 }

@@ -1,4 +1,5 @@
 package controller;
+import model.StatisticsDTO;
 import model.Trial;
 import view.View;
 
@@ -49,6 +50,14 @@ public class Controller {
      */
     public int requestAmountOfOutcome(int face) {
         return view.numberOfFace(face);
+    }
+
+    /**
+     * Tasks the model to assemble statistics based on previous input.
+     * @return a <code>StatisticsDTO</code> containing the resulting mathematical output of a <code>Trial</code>.
+     */
+    public StatisticsDTO requestResults() {
+        return trial.assembleStatistics();
     }
 
     /**

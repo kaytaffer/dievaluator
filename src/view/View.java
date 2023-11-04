@@ -1,5 +1,7 @@
 package view;
 import controller.Controller;
+import model.StatisticsDTO;
+
 import java.util.Scanner;
 
 /**
@@ -46,7 +48,7 @@ public class View {
                 controller.throwDice();
                 break;
             case 2:
-                //TODO
+                showResults();
                 break;
             case 3:
                 controller.newTrial();
@@ -80,5 +82,15 @@ public class View {
     private void presentProgram() {
         System.out.println("This program asks you to roll an amount (which you decide) of six-sided dice to try " +
                 "and determine if they as a group are fairly balanced.\n");
+    }
+
+    // Requests Statistics to show and displays it for the user to view.
+    private void showResults() {
+        StatisticsDTO stats = controller.requestResults();
+
+        //TODO parse returning info and display neatly.
+
+        System.out.println("Press any key to proceed.");
+        input.next();
     }
 }
