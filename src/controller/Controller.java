@@ -1,6 +1,7 @@
 package controller;
 import model.StatisticsDTO;
 import model.Trial;
+import util.Statistics;
 import view.View;
 
 /**
@@ -56,7 +57,8 @@ public class Controller {
      * @return a <code>StatisticsDTO</code> containing the resulting mathematical output of a <code>Trial</code>.
      */
     public StatisticsDTO requestResults() {
-        return trial.assembleStatistics();
+        int[] savedInput = trial.getSavedInput();
+        return Statistics.assembleStatistics(savedInput);
     }
 
     /**

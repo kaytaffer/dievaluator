@@ -10,6 +10,7 @@ public class Trial {
     private final int amountOfDice;
     private final int sidesOnDie = 6; //TODO option: allow for multiple types of dice beyond d6's through overloaded constructor
     private final Controller controller;
+
     private int[] savedInput; //state of amount of each side of die rolled.
 
     /**
@@ -25,8 +26,6 @@ public class Trial {
 
     /**
      * For each side of the die records the amount of that outcome.
-     * @return an array of length corresponding to the number of sides on the dice with a record of how many
-     * 1's, 2's, etc. were rolled in this throw.
      */
     public void recordThrow(){
         int[] newThrow = new int[sidesOnDie];
@@ -52,15 +51,11 @@ public class Trial {
     }
 
     /**
-     * //TODO
-     * @return A Data Transfer Object containing the resulting mathematical output of a <code>Trial</code>. If the state
-     * has recorded nothing thus far the DTO contains only null values.
+     * Gets the state of results of all rolled dice
+     * @return an array with each side of the die represented by the index (+1).
      */
-    public StatisticsDTO assembleStatistics() {
-        int sum = IntStream.of(savedInput).sum();
-        if (sum == 0)
-            return new StatisticsDTO(sum);
-        else return new StatisticsDTO(0); //TODO Actually build a useful DTO
+    public int[] getSavedInput() {
+        return savedInput;
     }
 
 }
