@@ -6,7 +6,8 @@ package model;
 public class StatisticsDTO {
 
     private final Integer totalDiceRolled;
-    private int[] savedInput;
+    private double uniformExpectedValue;
+    private double arithmeticMean;
 
     /**
      * Creates an instance of an empty <code>StatisticsDTO</code>
@@ -16,16 +17,21 @@ public class StatisticsDTO {
         this.totalDiceRolled = null;
     }
 
-    public StatisticsDTO(int totalDiceRolled, int[] savedInput) {
+    public StatisticsDTO(int totalDiceRolled, double uniformExpectedValue, double arithmeticMean) {
         this.totalDiceRolled = totalDiceRolled;
-        this.savedInput = savedInput;
+        this.uniformExpectedValue = uniformExpectedValue;
+        this.arithmeticMean = arithmeticMean;
     }
 
     public Integer getTotalDiceRolled() {
         return totalDiceRolled;
     }
 
-    public int[] getSavedInput() {
-        return savedInput;
+    public double getUniformExpectedValue() {
+        return uniformExpectedValue;
+    }
+
+    public double getArithmeticMean() {
+        return arithmeticMean;
     }
 }
