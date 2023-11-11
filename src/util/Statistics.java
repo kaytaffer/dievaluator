@@ -18,7 +18,12 @@ public class Statistics {
         double uniformExpectedValue = calculateUniformExpectedValue(savedInput);
         double uniformVariance = calculateUniformVariance(savedInput);
         double arithmeticMean = calculateArithmeticMean(savedInput, totalDiceRolled);
-        double sampleVariance = estimateVariance(savedInput, totalDiceRolled, arithmeticMean); //TODO
+        double sampleVariance = estimateVariance(savedInput, totalDiceRolled, arithmeticMean);
+
+        double offsetExpectedValue = Math.abs(arithmeticMean - uniformExpectedValue);
+        boolean meanGreaterThanExpectedValue = arithmeticMean > uniformExpectedValue;
+
+        double confidence = evaluateConfidence(totalDiceRolled, offsetExpectedValue, Math.sqrt(sampleVariance));
 
         return new StatisticsDTO(totalDiceRolled, uniformExpectedValue, arithmeticMean ); //TODO Actually build a useful DTO
     }
@@ -61,9 +66,24 @@ public class Statistics {
         return variance;
     }
 
-    //TODO t-table
-    //TODO solve for confidence level:          CI_mu = X +/- qT_((1+c)/2)(of (n-1) t-table) * s/sqrt(n),
+    // Returns a confidence level that the arithmetic mean doesn't deviate from the expected value (offset).
+    // CI_mu = x +/- q_((1+c)/2) * sigma/sqrt(n)   -> c = 2 * evaluatedquantile(|mu-x|*sqrt(n)/sigma) -1
+    private static double evaluateConfidence(int totalDiceRolled, double offsetExpectedValue, double standardDeviation){
+        double percentageConfidence;
+        double quantileToEvaluate = offsetExpectedValue * Math.sqrt(totalDiceRolled)/standardDeviation;
+/*        if(totalDiceRolled > 100) {
+            //TODO normal
+        }
+        else {
+            //TODO t-dist
+        }
+*/
+        percentageConfidence = quantileToEvaluate * 2 - 1;
+
+        return percentageConfidence = 0; //TODO remove hardcode
+    }
+
+    //TODO t-table TDistribution https://commons.apache.org/proper/commons-math/
     //TODO normal dist table for n >= 100
-    //TODO solve for confidence level:          CI_mu = X +/- qN_((1+c)/2) * s/sqrt(n)
     //TODO Hypothesis testing H_0 = mu = mean. Produce alpha (H0 rejected| H0 true) and beta(H0 rejected| H1 true).
 }
