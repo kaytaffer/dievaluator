@@ -16,22 +16,20 @@ public class Statistics {
         if (totalDiceRolled == 0)
             return new StatisticsDTO(totalDiceRolled);
         double uniformExpectedValue = calculateUniformExpectedValue(savedInput);
-        double uniformVariance = calculateUniformVariance(savedInput);
+        double uniformDeviation = Math.sqrt(calculateUniformVariance(savedInput));
         double arithmeticMean = calculateArithmeticMean(savedInput, totalDiceRolled);
         double sampleVariance = estimateVariance(savedInput, totalDiceRolled, arithmeticMean);
-
+        double sampleDeviation = Math.sqrt(sampleVariance);
         double offsetExpectedValue = Math.abs(arithmeticMean - uniformExpectedValue);
-        boolean meanGreaterThanExpectedValue = arithmeticMean > uniformExpectedValue;
+        Double confidence = evaluateConfidence(totalDiceRolled, offsetExpectedValue, sampleDeviation);
 
-        double confidence = evaluateConfidence(totalDiceRolled, offsetExpectedValue, Math.sqrt(sampleVariance));
-
-        return new StatisticsDTO(totalDiceRolled, uniformExpectedValue, arithmeticMean ); //TODO Actually build a useful DTO
+        return new StatisticsDTO(totalDiceRolled, uniformExpectedValue, uniformDeviation, arithmeticMean, sampleDeviation, confidence);
     }
 
     //returns the expected value of a fair die (assuming uniform distribution)
     private static double calculateUniformExpectedValue(int[] sample) {
         double numOfSides = sample.length;
-        return Math.round((1.0 + numOfSides) / 2.0);
+        return (1.0 + numOfSides) / 2.0;
     }
 
     //Returns the variance of a uniform distribution.
@@ -67,23 +65,18 @@ public class Statistics {
     }
 
     // Returns a confidence level that the arithmetic mean doesn't deviate from the expected value (offset).
-    // CI_mu = x +/- q_((1+c)/2) * sigma/sqrt(n)   -> c = 2 * evaluatedquantile(|mu-x|*sqrt(n)/sigma) -1
-    private static double evaluateConfidence(int totalDiceRolled, double offsetExpectedValue, double standardDeviation){
-        double percentageConfidence;
+    // CI_mu = x +/- q_((1+c)/2) * sigma/sqrt(n)   -> c = 2 * evaluated_quantile(|mu-x|*sqrt(n)/sigma) -1
+    private static Double evaluateConfidence(int totalDiceRolled, double offsetExpectedValue, double standardDeviation){
+        Double percentageConfidence;
         double quantileToEvaluate = offsetExpectedValue * Math.sqrt(totalDiceRolled)/standardDeviation;
-/*        if(totalDiceRolled > 100) {
-            //TODO normal
-        }
-        else {
-            //TODO t-dist
-        }
-*/
-        percentageConfidence = quantileToEvaluate * 2 - 1;
-
-        return percentageConfidence = 0; //TODO remove hardcode
+        // if(totalDiceRolled > 100) {
+            //TODO normal dist table for n >= 100
+        // else
+            percentageConfidence = TTable.evaluateQuantile(totalDiceRolled, quantileToEvaluate);
+        if (percentageConfidence != null)
+            percentageConfidence = percentageConfidence * 2 - 1;
+        return percentageConfidence;
     }
 
-    //TODO t-table TDistribution https://commons.apache.org/proper/commons-math/
-    //TODO normal dist table for n >= 100
     //TODO Hypothesis testing H_0 = mu = mean. Produce alpha (H0 rejected| H0 true) and beta(H0 rejected| H1 true).
 }
