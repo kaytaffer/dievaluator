@@ -48,7 +48,7 @@ public class TTable {
      * @return A confidence level ranging from 0.9 to 0.99999. If the confidence level is less than 90%,
      * will return null.
      */
-    public static Double evaluateQuantile(int degreesOfFreedom, double quantile){
+    static Double evaluateQuantile(int degreesOfFreedom, double quantile){
         if (degreesOfFreedom > 100)
             degreesOfFreedom = 101;
         else if (degreesOfFreedom >= 99)

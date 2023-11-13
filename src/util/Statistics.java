@@ -69,9 +69,9 @@ public class Statistics {
     private static Double evaluateConfidence(int totalDiceRolled, double offsetExpectedValue, double standardDeviation){
         Double percentageConfidence;
         double quantileToEvaluate = offsetExpectedValue * Math.sqrt(totalDiceRolled)/standardDeviation;
-        // if(totalDiceRolled > 100) {
-            //TODO normal dist table for n >= 100
-        // else
+        if(totalDiceRolled > 100)
+            percentageConfidence = ZScores.evaluateQuantile(quantileToEvaluate);
+        else
             percentageConfidence = TTable.evaluateQuantile(totalDiceRolled, quantileToEvaluate);
         if (percentageConfidence != null)
             percentageConfidence = percentageConfidence * 2 - 1;
