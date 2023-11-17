@@ -28,7 +28,8 @@ public class View {
      */
     public int howManyDice() {
         System.out.println("How many dice are you rolling each time? ");
-        return Integer.parseInt(input.nextLine());
+
+        return input.nextInt();
     }
 
     /**
@@ -66,7 +67,7 @@ public class View {
     }
 
     /**
-     * closes open instances.
+     * Closes open instances.
      */
     public void shutdown(){
         input.close();
@@ -74,7 +75,7 @@ public class View {
 
     //presents the usage of the program to the user.
     private void presentProgram() {
-        System.out.println("This program asks you to roll an amount (which you decide) of six-sided dice to try " +
+        System.out.println("This application asks you to roll an amount (which you decide) of six-sided dice to try " +
                 "and determine if they as a group are fairly balanced.\n");
     }
 

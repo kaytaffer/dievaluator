@@ -1,6 +1,14 @@
 import controller.Controller;
 
+/**
+ * Dievaluator helps you decide if your favorite dice are fair.
+ */
 public class Main {
+
+    /**
+     * Bootstraps application
+     * @param args no arguments needed.
+     */
     public static void main(String[] args) {
         //initialize
         Controller controller = new Controller();
