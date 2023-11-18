@@ -9,7 +9,7 @@ package model;
  * @param sampleDeviation the estimated standard deviation based on the recorded sample
  * @param confidence the confidence level that these dice are completely fair
  */
-public record DiceStatisticsDTO(Integer totalDiceRolled, double uniformDeviation, double uniformExpectedValue,
+public record DiceStatisticsDTO(Integer totalDiceRolled, double uniformExpectedValue, double uniformDeviation,
                                 double arithmeticMean, double sampleDeviation, Double confidence) {
 
 }
