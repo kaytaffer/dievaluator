@@ -92,14 +92,12 @@ public class View {
         System.out.println("You've rolled " + totalDiceRolled + " dice.");
         double expectedValue = stats.uniformExpectedValue(); //for totally fair dice
         double arithmeticMean = stats.arithmeticMean(); //for the evaluated dice
-        System.out.println("The expected value on the roll of these dice is " + expectedValue);
-        System.out.println("The statistical average of your rolled dice is " + arithmeticMean +
-                ". This is a difference of " + (expectedValue - arithmeticMean) + " compared to completely fair " +
-                "dice based on the trials you've entered.");
+        System.out.printf("The expected value on the roll of these dice is %.2f\n", expectedValue);
+        System.out.printf("The statistical average of your rolled dice is %.2f.\n", arithmeticMean);
+        System.out.printf("This is a difference of %.2f compared to completely fair dice.\n", (expectedValue - arithmeticMean));
         double uniformDeviation = stats.uniformDeviation();
         double sampleDeviation = stats.sampleDeviation();
         boolean swingy = sampleDeviation > uniformDeviation;
-
         String[] swingyness = new String[2]; //towards center or edges
         if (swingy) {
             swingyness[0] = "more";
@@ -110,17 +108,17 @@ public class View {
             swingyness[1] = "their statistical average";
         }
         double deviationDifference = Math.abs(uniformDeviation - sampleDeviation);
-        System.out.println("The expected standard deviation for a die of this kind is " + uniformDeviation + ".");
-        System.out.println("The estimated standard deviation based on the samples provided is " + sampleDeviation + ".");
-        System.out.println("This means the tested dice are " + swingyness[0] + " swingy than a completely fair die. " +
-                "They tend towards " + swingyness[1] + " more often with a difference in standard deviation of " + deviationDifference);
+        System.out.printf("The expected standard deviation for a die of this kind is %.2f.\n", uniformDeviation);
+        System.out.printf("The estimated standard deviation based on the samples provided is %.2f.\n", sampleDeviation);
+        System.out.printf("This means the tested dice are %s swingy than a completely fair die. They tend towards " +
+                "%s more often with a difference in standard deviation of %.2f\n", swingyness[0], swingyness[1], deviationDifference);
         Double fairnessConfidence = stats.confidence();
         if (fairnessConfidence == null)
             System.out.println("The likelihood that the dice in this trial are fair is less than 90%. However, " +
                     "it's not clear exactly how fair. Try adding more rolls to get a clearer calculation.");
         else
-            System.out.println("Samples will never be ideal, but according to the trials performed so far \n" +
-                "there is a " + (fairnessConfidence * 100) + "% chance the dice in this trial are completely fair.");
+            System.out.printf("Samples will never be ideal, but according to the trials performed so far \n" +
+                "there is a %.0f%% chance the dice in this trial are completely fair.", (fairnessConfidence * 100));
         System.out.println("\nType \"y\" to proceed.");
         input.next();
     }
