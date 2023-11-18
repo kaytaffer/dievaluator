@@ -9,12 +9,12 @@ public class Statistics {
     /**
      * //TODO
      * @return A Data Transfer Object containing the resulting mathematical output of a <code>Trial</code>. If the state
-     * has recorded nothing thus far the DTO contains only null values.
+     * has recorded nothing thus far this method returns null.
      */
     public static StatisticsDTO assembleStatistics(int[] savedInput) {
         int totalDiceRolled = IntStream.of(savedInput).sum();
         if (totalDiceRolled == 0)
-            return new StatisticsDTO(totalDiceRolled);
+            return null;
         double uniformExpectedValue = calculateUniformExpectedValue(savedInput);
         double uniformDeviation = Math.sqrt(calculateUniformVariance(savedInput));
         double arithmeticMean = calculateArithmeticMean(savedInput, totalDiceRolled);

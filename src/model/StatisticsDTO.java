@@ -13,13 +13,14 @@ public class StatisticsDTO {
     private Double confidence;
 
     /**
-     * Creates an instance of an empty <code>StatisticsDTO</code>
-     * @param totalDiceRolled should be 0 for this DTO.
+     * // TODO  javadoc
+     * @param totalDiceRolled
+     * @param uniformExpectedValue
+     * @param uniformDeviation
+     * @param arithmeticMean
+     * @param sampleDeviation
+     * @param confidence
      */
-    public StatisticsDTO(int totalDiceRolled) {
-        this.totalDiceRolled = null;
-    }
-
     public StatisticsDTO(int totalDiceRolled, double uniformExpectedValue, double uniformDeviation,
                          double arithmeticMean, double sampleDeviation, Double confidence) {
         this.totalDiceRolled = totalDiceRolled;
