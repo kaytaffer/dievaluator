@@ -1,6 +1,6 @@
 package util;
 
-import model.StatisticsDTO;
+import model.DiceStatisticsDTO;
 
 import java.util.stream.IntStream;
 
@@ -11,7 +11,7 @@ public class Statistics {
      * @return A Data Transfer Object containing the resulting mathematical output of a <code>Trial</code>. If the state
      * has recorded nothing thus far this method returns null.
      */
-    public static StatisticsDTO assembleStatistics(int[] savedInput) {
+    public static DiceStatisticsDTO assembleStatistics(int[] savedInput) {
         int totalDiceRolled = IntStream.of(savedInput).sum();
         if (totalDiceRolled == 0)
             return null;
@@ -23,7 +23,7 @@ public class Statistics {
         double offsetExpectedValue = Math.abs(arithmeticMean - uniformExpectedValue);
         Double confidence = evaluateConfidence(totalDiceRolled, offsetExpectedValue, sampleDeviation);
 
-        return new StatisticsDTO(totalDiceRolled, uniformExpectedValue, uniformDeviation, arithmeticMean, sampleDeviation, confidence);
+        return new DiceStatisticsDTO(totalDiceRolled, uniformExpectedValue, uniformDeviation, arithmeticMean, sampleDeviation, confidence);
     }
 
     //returns the expected value of a fair die (assuming uniform distribution)

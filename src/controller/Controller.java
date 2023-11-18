@@ -1,5 +1,5 @@
 package controller;
-import model.StatisticsDTO;
+import model.DiceStatisticsDTO;
 import model.Trial;
 import util.Statistics;
 import view.View;
@@ -56,7 +56,7 @@ public class Controller {
      * Tasks the model to assemble statistics based on previous input.
      * @return a <code>StatisticsDTO</code> containing the resulting mathematical output of a <code>Trial</code>.
      */
-    public StatisticsDTO requestResults() {
+    public DiceStatisticsDTO requestResults() {
         int[] savedInput = trial.getSavedInput();
         return Statistics.assembleStatistics(savedInput);
     }
