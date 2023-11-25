@@ -1,5 +1,8 @@
 package util;
 
+/**
+ * TODO
+ */
 public class ZScores {
 
     private final static int ROWS = 32;
@@ -39,6 +42,11 @@ public class ZScores {
             {3.0 , 0.99865 , 0.99869 , 0.99874 , 0.99878 , 0.99882 , 0.99886 , 0.99889 , 0.99893 , 0.99896 , 0.99900} ,
     };
 
+    /**
+     * TODO
+     * @param zScore
+     * @return
+     */
     public static Double evaluateQuantile (double zScore) {
         Double confidence = null;
         if (zScore > 3 )

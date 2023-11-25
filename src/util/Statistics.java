@@ -4,6 +4,9 @@ import model.DiceStatisticsDTO;
 
 import java.util.stream.IntStream;
 
+/**
+ * TODO
+ */
 public class Statistics {
 
     /**

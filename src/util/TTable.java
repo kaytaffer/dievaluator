@@ -1,5 +1,8 @@
 package util;
 
+/**
+ * TODO
+ */
 public class TTable {
     private final static int COLUMNS = 11;
     private final static double[][] TABLE = {

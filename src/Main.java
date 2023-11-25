@@ -1,7 +1,7 @@
 import controller.Controller;
 
 /**
- * Dievaluator helps you decide if your favorite dice are fair.
+ * Dievaluator helps you decide if your favorite dice roll fairly.
  */
 public class Main {
 
