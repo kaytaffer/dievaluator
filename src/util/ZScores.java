@@ -1,13 +1,13 @@
 package util;
 
 /**
- * TODO
+ * Contains static methods to evaluate standardized normal distribution z-scores and proportions.
  */
 public class ZScores {
 
     private final static int ROWS = 32;
     private final static int COLUMNS = 11;
-    private final static double[][] TABLE = {
+    private final static double[][] TABLE = { //Z-score table
             {0 , 0.00 , 0.01 , 0.02 , 0.03 , 0.04 , 0.05 , 0.06 , 0.07 , 0.08 , 0.09} ,
             {0.0 , 0.50000 , 0.50399 , 0.50798 , 0.51197 , 0.51595 , 0.51994 , 0.52392 , 0.52790 , 0.53188 , 0.53586} ,
             {0.1 , 0.53983 , 0.54380 , 0.54776 , 0.55172 , 0.55567 , 0.55962 , 0.56356 , 0.56749 , 0.57142 , 0.57535} ,
@@ -43,9 +43,9 @@ public class ZScores {
     };
 
     /**
-     * TODO
-     * @param zScore
-     * @return
+     * Evaluates the probability space corresponding to the supplied z-score for a standardised normal distribution.
+     * @param zScore A one-sided positive z-score.
+     * @return The proportion of the probability space covered by the supplied z-score.
      */
     public static Double evaluateQuantile (double zScore) {
         Double confidence = null;

@@ -16,11 +16,11 @@ Dievaluator helps you decide if your favorite dice roll fairly.
 
 ### util
 
-`Statistics` - TODO
+`Statistics` - Performs calculations to produce statistics based on assumed uniform distribution and on the supplied sample.
 
-`TTABLE` - TODO
+`TTable` - Contains static methods to evaluate probabilities for quantiles for t-distributions for an amount of different sample sizes.
 
-`ZScores` - TODO
+`ZScores` - Contains static methods to evaluate standardized normal distribution z-scores and proportions.
 
 ### view
 

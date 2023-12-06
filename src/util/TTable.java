@@ -1,7 +1,8 @@
 package util;
 
 /**
- * TODO
+ * Contains static methods to evaluate probabilities for quantiles for t-distributions for an amount
+ * of different sample sizes.
  */
 public class TTable {
     private final static int COLUMNS = 11;

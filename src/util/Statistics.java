@@ -5,14 +5,14 @@ import model.DiceStatisticsDTO;
 import java.util.stream.IntStream;
 
 /**
- * TODO
+ * Performs calculations to produce statistics based on assumed uniform distribution and on the supplied sample.
  */
 public class Statistics {
 
     /**
-     * //TODO
-     * @return A Data Transfer Object containing the resulting mathematical output of a <code>Trial</code>. If the state
-     * has recorded nothing thus far this method returns null.
+     * Assembles a Data Transfer Object <code>DiceStatisticsDTO</code> containing statistics based on the supplied sample.
+     * @param savedInput array of recorded dice rolls.
+     * @return A Data Transfer Object containing the resulting mathematical output of a <code>Trial</code>.
      */
     public static DiceStatisticsDTO assembleStatistics(int[] savedInput) {
         int totalDiceRolled = IntStream.of(savedInput).sum();
