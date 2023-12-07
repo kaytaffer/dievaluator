@@ -19,7 +19,7 @@ public class Statistics {
         if (totalDiceRolled == 0)
             return null;
         double uniformExpectedValue = calculateUniformExpectedValue(savedInput);
-        double uniformDeviation = Math.sqrt(calculateUniformVariance(savedInput));
+        double uniformDeviation = Math.sqrt(calculateDiscreteUniformVariance(savedInput));
         double arithmeticMean = calculateArithmeticMean(savedInput, totalDiceRolled);
         double sampleVariance = estimateVariance(savedInput, totalDiceRolled, arithmeticMean);
         double sampleDeviation = Math.sqrt(sampleVariance);
@@ -36,8 +36,8 @@ public class Statistics {
     }
 
     //Returns the variance of a uniform distribution.
-    private static double calculateUniformVariance(int[] sample) {
-        return Math.pow((1-sample.length), 2) / 12.0;
+    private static double calculateDiscreteUniformVariance(int[] sample) {
+        return (Math.pow(sample.length, 2) - 1) / 12.0;
     }
 
     // calculates the weighted arithmetic mean of the supplied sample.
