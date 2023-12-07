@@ -61,7 +61,7 @@ public class Statistics {
         double numOfElements = numberOfElements * 1.0;
         double variance = 0.0;
         for(int i = 0; i < sample.length; i++) {
-            variance = variance + Math.pow(i - arithmeticMean, 2) * sample[i];
+            variance = variance + Math.pow((i+1) - arithmeticMean, 2) * sample[i];
         }
         variance = variance / (numOfElements - 1);
         return variance;
