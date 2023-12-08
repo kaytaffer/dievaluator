@@ -47,26 +47,26 @@ public class TTable {
 
     /**
      * Evaluates an approximate confidence level for a quantile given a certain degree of freedom.
-     * @param degreesOfFreedom The number of samples minus 1.
+     * @param degreesOfFreedomIndex The number of samples minus 1.
      * @param quantile The one-sided quantile in the t-distribution.
      * @return A confidence level ranging from 0.9 to 0.99999. If the confidence level is less than 90%,
      * will return null.
      */
-    static Double evaluateQuantile(int degreesOfFreedom, double quantile){
-        if (degreesOfFreedom > 100)
-            degreesOfFreedom = 101;
-        else if (degreesOfFreedom >= 99)
-            degreesOfFreedom = 99;
-        else if (degreesOfFreedom >=49)
-            degreesOfFreedom = 49;
-        else if (degreesOfFreedom >= 39)
-            degreesOfFreedom = 39;
-        else if(degreesOfFreedom > 30)
-            degreesOfFreedom = 30;
+    static Double evaluateQuantile(int degreesOfFreedomIndex, double quantile){
+        if (degreesOfFreedomIndex > 100)
+            degreesOfFreedomIndex = 34;
+        else if (degreesOfFreedomIndex >= 99)
+            degreesOfFreedomIndex = 33;
+        else if (degreesOfFreedomIndex >=49)
+            degreesOfFreedomIndex = 32;
+        else if (degreesOfFreedomIndex >= 39)
+            degreesOfFreedomIndex = 31;
+        else if(degreesOfFreedomIndex > 30)
+            degreesOfFreedomIndex = 30;
 
         Double confidence = null;
         for(int i = 1; i < COLUMNS; i++) {
-            if (quantile >= TABLE[degreesOfFreedom][i])
+            if (quantile >= TABLE[degreesOfFreedomIndex][i])
                 confidence = TABLE[0][i];
         }
         return confidence;
