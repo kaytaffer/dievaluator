@@ -77,7 +77,7 @@ public class Statistics {
         else
             percentageConfidence = TTable.evaluateQuantile(totalDiceRolled, quantileToEvaluate);
         if (percentageConfidence != null)
-            percentageConfidence = percentageConfidence * 2 - 1;
+            percentageConfidence = 2 - 2 * percentageConfidence;
         return percentageConfidence;
     }
 

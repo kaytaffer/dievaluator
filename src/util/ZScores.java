@@ -48,21 +48,21 @@ public class ZScores {
      * @return The proportion of the probability space covered by the supplied z-score.
      */
     public static Double evaluateQuantile (double zScore) {
-        Double confidence = null;
-        if (zScore > 3 )
-            confidence = 0.9999;
+        Double probability = null;
+        if (zScore > 3.09)
+            probability = 0.9999;
         for (int i = 0; i < ROWS; i++) {
             if(TABLE[i][0] > zScore) {
                 zScore = zScore - TABLE[i - 1][0];
                 for (int j = 0; j < COLUMNS; j++) {
                     if(TABLE[0][j] > zScore){
-                        confidence = TABLE[i - 1][j - 1];
+                        probability = TABLE[i - 1][j - 1];
                         break;
                     }
                 }
                 break;
             }
         }
-        return confidence;
+        return probability;
     }
 }
