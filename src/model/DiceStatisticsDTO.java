@@ -10,6 +10,6 @@ package model;
  * @param confidence the confidence level that these dice are completely fair
  */
 public record DiceStatisticsDTO(Integer totalDiceRolled, double uniformExpectedValue, double uniformDeviation,
-                                double arithmeticMean, double sampleDeviation, Double confidence) {
+                                double arithmeticMean, double sampleDeviation, double confidence) {
 
 }

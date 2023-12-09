@@ -24,7 +24,7 @@ public class Statistics {
         double sampleVariance = estimateVariance(savedInput, totalDiceRolled, arithmeticMean);
         double sampleDeviation = Math.sqrt(sampleVariance);
         double offsetExpectedValue = Math.abs(arithmeticMean - uniformExpectedValue);
-        Double confidence = evaluateConfidence(totalDiceRolled, offsetExpectedValue, sampleDeviation);
+        double confidence = evaluateConfidence(totalDiceRolled, offsetExpectedValue, sampleDeviation);
 
         return new DiceStatisticsDTO(totalDiceRolled, uniformExpectedValue, uniformDeviation, arithmeticMean, sampleDeviation, confidence);
     }
@@ -69,16 +69,14 @@ public class Statistics {
 
     // Returns a confidence level that the arithmetic mean doesn't deviate from the expected value (offset).
     // CI_mu = x +/- q_((1+c)/2) * sigma/sqrt(n)   -> c = 2 * evaluated_quantile(|mu-x|*sqrt(n)/sigma) -1
-    private static Double evaluateConfidence(int totalDiceRolled, double offsetExpectedValue, double standardDeviation){
-        Double percentageConfidence;
+    private static double evaluateConfidence(int totalDiceRolled, double offsetExpectedValue, double standardDeviation){
+        double percentageConfidence;
         double quantileToEvaluate = offsetExpectedValue * Math.sqrt(totalDiceRolled)/standardDeviation;
         if(totalDiceRolled > 100)
             percentageConfidence = ZScores.evaluateQuantile(quantileToEvaluate);
         else
             percentageConfidence = TTable.evaluateQuantile(totalDiceRolled, quantileToEvaluate);
-        if (percentageConfidence != null)
-            percentageConfidence = 2 - 2 * percentageConfidence;
-        return percentageConfidence;
+        return 2 - 2 * percentageConfidence;
     }
 
     //TODO Hypothesis testing H_0 = mu = mean. Produce alpha (H0 rejected| H0 true) and beta(H0 rejected| H1 true).

@@ -75,6 +75,7 @@ public class View {
 
     //presents the usage of the program to the user.
     private void presentProgram() {
+        //TODO cool ASCII intro
         System.out.println("This application asks you to roll an amount (which you decide) of six-sided dice to try " +
                 "and determine if they as a group are fairly balanced.\n");
     }
@@ -86,7 +87,7 @@ public class View {
             System.out.println("You haven't recorded any rolls yet.");
             return;
         }
-
+        //TODO prettify
         int totalDiceRolled = stats.totalDiceRolled();
         System.out.println("----------- Dice Report -----------");
         System.out.println("You've rolled " + totalDiceRolled + " dice.");
@@ -112,13 +113,9 @@ public class View {
         System.out.printf("The estimated standard deviation based on the samples provided is %.2f.\n", sampleDeviation);
         System.out.printf("This means the tested dice are %s swingy than a completely fair die. They tend towards " +
                 "%s more often with a difference in standard deviation of %.2f\n", swingyness[0], swingyness[1], deviationDifference);
-        Double fairnessConfidence = stats.confidence();
-        if (fairnessConfidence == null)
-            System.out.println("The likelihood that the dice in this trial are fair is less than 90%. However, " +
-                    "it's not clear exactly how fair. Try adding more rolls to get a clearer calculation.");
-        else
+        double fairnessConfidence = stats.confidence();
             System.out.printf("Samples will never be ideal, but according to the trials performed so far \n" +
-                "there is a %.0f%% chance the dice in this trial are completely fair.", (fairnessConfidence * 100));
+                "there is a %.2f%% chance the dice in this trial are completely fair.", (fairnessConfidence * 100));
         System.out.println("\nType \"y\" to proceed.");
         input.next();
     }

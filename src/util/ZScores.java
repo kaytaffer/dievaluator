@@ -47,8 +47,8 @@ public class ZScores {
      * @param zScore A one-sided positive z-score.
      * @return The proportion of the probability space covered by the supplied z-score.
      */
-    public static Double evaluateQuantile (double zScore) {
-        Double probability = null;
+    public static double evaluateQuantile (double zScore) {
+        double probability = 0.0;
         if (zScore > 3.09)
             probability = 0.9999;
         for (int i = 0; i < ROWS; i++) {
