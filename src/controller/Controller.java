@@ -51,6 +51,7 @@ public class Controller {
     public int requestAmountOfOutcome(int face) {
         return view.numberOfFace(face);
     }
+    //TODO prompt the user if the wrong total number is entered.
 
     /**
      * Tasks the model to assemble statistics based on previous input.

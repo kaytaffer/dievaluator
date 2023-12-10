@@ -75,9 +75,20 @@ public class View {
 
     //presents the usage of the program to the user.
     private void presentProgram() {
-        //TODO cool ASCII intro
-        System.out.println("This application asks you to roll an amount (which you decide) of six-sided dice to try " +
-                "and determine if they as a group are fairly balanced.\n");
+        System.out.print("""
+                   . ___________ .
+                  /     o      / |
+                 /___________ / o|
+                |            |o  |
+                |  O      O  |  o|
+                |     0      |o /
+                |  O      O  | /
+                |____________|/
+                """);
+        System.out.println("""
+                This application asks you to roll an amount (which you decide) of six-sided dice
+                to try and determine if they as a group are fairly balanced.
+                """);
     }
 
     // Requests Statistics to show and displays it for the user to view.
@@ -87,15 +98,14 @@ public class View {
             System.out.println("You haven't recorded any rolls yet.");
             return;
         }
-        //TODO prettify
         int totalDiceRolled = stats.totalDiceRolled();
         System.out.println("----------- Dice Report -----------");
-        System.out.println("You've rolled " + totalDiceRolled + " dice.");
+        System.out.println("You've rolled " + totalDiceRolled + " dice in total.");
         double expectedValue = stats.uniformExpectedValue(); //for totally fair dice
         double arithmeticMean = stats.arithmeticMean(); //for the evaluated dice
         System.out.printf("The expected value on the roll of these dice is %.2f\n", expectedValue);
         System.out.printf("The statistical average of your rolled dice is %.2f.\n", arithmeticMean);
-        System.out.printf("This is a difference of %.2f compared to completely fair dice.\n", (expectedValue - arithmeticMean));
+        System.out.printf("This is a difference of %.2f compared to completely fair dice.\n\n", (expectedValue - arithmeticMean));
         double uniformDeviation = stats.uniformDeviation();
         double sampleDeviation = stats.sampleDeviation();
         boolean swingy = sampleDeviation > uniformDeviation;
@@ -111,12 +121,16 @@ public class View {
         double deviationDifference = Math.abs(uniformDeviation - sampleDeviation);
         System.out.printf("The expected standard deviation for a die of this kind is %.2f.\n", uniformDeviation);
         System.out.printf("The estimated standard deviation based on the samples provided is %.2f.\n", sampleDeviation);
-        System.out.printf("This means the tested dice are %s swingy than a completely fair die. They tend towards " +
-                "%s more often with a difference in standard deviation of %.2f\n", swingyness[0], swingyness[1], deviationDifference);
+        System.out.printf("""
+                This means the tested dice are %s swingy than a completely fair die.
+                They tend towards %s more often with a difference
+                in standard deviation of %.2f.
+                
+                """, swingyness[0], swingyness[1], deviationDifference);
         double fairnessConfidence = stats.confidence();
             System.out.printf("Samples will never be ideal, but according to the trials performed so far \n" +
-                "there is a %.2f%% chance the dice in this trial are completely fair.", (fairnessConfidence * 100));
-        System.out.println("\nType \"y\" to proceed.");
+                "the probability that the dice in this trial are completely fair is approximately %.2f%%.", (fairnessConfidence * 100));
+        System.out.println("\nType \"y\" to proceed."); //TODO change to any key
         input.next();
     }
 
