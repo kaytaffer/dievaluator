@@ -31,6 +31,7 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-######
+### Ignored file types ###
 *.xml
 *.iml
+*.txt

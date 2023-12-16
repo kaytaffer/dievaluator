@@ -1,6 +1,7 @@
 package controller;
 import model.DiceStatisticsDTO;
 import model.Trial;
+import util.DiceLogger;
 import util.Statistics;
 import view.View;
 
@@ -59,6 +60,9 @@ public class Controller {
      */
     public DiceStatisticsDTO requestResults() {
         int[] savedInput = trial.getSavedInput();
+        DiceLogger logger = new DiceLogger();
+        logger.logDiceRolls(savedInput);
+        logger.closeWriter();
         return Statistics.assembleStatistics(savedInput);
     }
 

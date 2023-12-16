@@ -1,7 +1,6 @@
 package model;
 
 import controller.Controller;
-import java.util.stream.IntStream;
 
 /**
  * Represents an ongoing trial to determine the fairness of a group of dice.
@@ -11,7 +10,7 @@ public class Trial {
     private final int sidesOnDie = 6; //TODO option: allow for multiple types of dice beyond d6's through overloaded constructor
     private final Controller controller;
 
-    private int[] savedInput; //state of amount of each side of die rolled.
+    private final int[] savedInput; //state of amount of each side of die rolled.
 
     /**
      * Creates an instance of a dice trial.
