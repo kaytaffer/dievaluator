@@ -18,7 +18,7 @@ public class Controller {
      */
     public Controller(){
         view = new View(this);
-        trial = new Trial(this, view.howManyDice());
+        trial = new Trial(view.howManyDice());
     }
 
     /**
@@ -34,25 +34,33 @@ public class Controller {
      * Starts a fresh <code>Trial</code> and sets it as the current one.
      */
     public void newTrial() {
-        trial = new Trial(this, view.howManyDice());
+        trial = new Trial(view.howManyDice());
     }
 
     /**
      * Tasks the <code>Trial</code> to record the results of a new dice throw.
+     * @param newThrow an array of ints representing amounts of dice results. Each index <code>i</code> should
+     *                 correspond to the <code>i + 1</code>:th face of the die.
      */
-    public void throwDice() {
-        trial.recordThrow();
+    public void recordThrow(int[] newThrow) {
+        trial.saveThrow(newThrow);
     }
 
     /**
-     * Calls the <code>View</code> to prompt the user for the amount of dice showing a particular result.
-     * @param face the side of the dice currently asked for.
-     * @return the inputted value.
+     * Fetches the amount dice in the <code>Trial</code>.
+     * @return the number of dice in the <code>Trial</code>.
      */
-    public int requestAmountOfOutcome(int face) {
-        return view.numberOfFace(face);
+    public int howManyDice() {
+        return trial.getAmountOfDice();
     }
-    //TODO prompt the user if the wrong total number is entered.
+
+    /**
+     * Fetches the amount of sides on the dice in the <code>Trial</code>.
+     * @return The number of sides of the dice in the <code>Trial</code>.
+     */
+    public int howManySides() {
+        return trial.getSidesOnDie();
+    }
 
     /**
      * Tasks the model to assemble statistics based on previous input.

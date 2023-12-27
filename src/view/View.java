@@ -28,7 +28,6 @@ public class View {
      */
     public int howManyDice() {
         System.out.println("How many dice are you rolling each time? ");
-
         return input.nextInt();
     }
 
@@ -45,7 +44,10 @@ public class View {
                 ++optionNumber + ". Exit.");
         int choice = input.nextInt();
         switch (choice) {
-            case 1 -> controller.throwDice();
+            case 1 -> {
+                int[] newThrow = numberOfEachFace(controller.howManySides(), controller.howManyDice());
+                controller.recordThrow(newThrow);
+            }
             case 2 -> showResults();
             case 3 -> controller.newTrial();
             case 4 -> {
@@ -58,25 +60,36 @@ public class View {
 
     /**
      * Prompts the user for the amount of dice showing a particular result.
-     * @param face the side of the dice currently asked for.
+     * @param faces the side of the dice currently asked for.
      * @return the amount counted and entered by the user.
      */
-    public int numberOfFace(int face){
-        System.out.println("How many " + face + "'s were rolled? ");
-        return input.nextInt();
-    }
-
-    /**
-     * Closes open instances.
-     */
-    public void shutdown(){
-        input.close();
+    public int[] numberOfEachFace(int faces, int amount){
+        int[] rolls = new int[faces];
+        for (int face : rolls) {
+            System.out.println("How many " + face + "'s were rolled? ");
+            rolls[face] = input.nextInt();
+        }
+        System.out.print("You entered the following: \nface:\t");
+        for (int i = 1; i <= faces; i++)
+            System.out.printf("%d\t", i);
+        System.out.print("\nrolls:\t");
+        for (int i = 0; i < faces; i++)
+            System.out.printf("%d\t", rolls[i]);
+        System.out.println("\nIs this correct? y/n: ");
+        //TODO prompt the user if the wrong total number is entered.
+        String userDone = input.next();
+        if (userDone.equals("y"))
+            return rolls;
+        else {
+            System.out.println("Re-recording throws:");
+            return numberOfEachFace(faces, amount);
+        }
     }
 
     //presents the usage of the program to the user.
     private void presentProgram() {
         System.out.print("""
-                   . ___________ .
+                    _____________
                   /     o      / |
                  /___________ / o|
                 |            |o  |
@@ -134,4 +147,10 @@ public class View {
         input.next();
     }
 
+    /**
+     * Closes open instances.
+     */
+    public void shutdown(){
+        input.close();
+    }
 }
