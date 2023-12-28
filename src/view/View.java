@@ -69,10 +69,11 @@ public class View {
         for (int i = 1; i <= rolls.length && sum < amount; i++) {
             System.out.println("How many " + i + "'s were rolled? ");
             int userInput = input.nextInt();
-            rolls[i] = userInput;
+            rolls[i - 1] = userInput;
             sum += userInput;
         }
-        //TODO prompt the user if the wrong total number is entered.
+        if(sum != amount)
+            System.out.println("The entered numbers don't add up to " + amount + "dice.");
         System.out.print("You entered the following: \nface:\t");
         for (int i = 1; i <= faces; i++)
             System.out.printf("%d\t", i);
