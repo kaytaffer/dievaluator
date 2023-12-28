@@ -65,10 +65,14 @@ public class View {
      */
     public int[] numberOfEachFace(int faces, int amount){
         int[] rolls = new int[faces];
-        for (int face : rolls) {
-            System.out.println("How many " + face + "'s were rolled? ");
-            rolls[face] = input.nextInt();
+        int sum = 0;
+        for (int i = 1; i <= rolls.length && sum < amount; i++) {
+            System.out.println("How many " + i + "'s were rolled? ");
+            int userInput = input.nextInt();
+            rolls[i] = userInput;
+            sum += userInput;
         }
+        //TODO prompt the user if the wrong total number is entered.
         System.out.print("You entered the following: \nface:\t");
         for (int i = 1; i <= faces; i++)
             System.out.printf("%d\t", i);
@@ -76,7 +80,7 @@ public class View {
         for (int i = 0; i < faces; i++)
             System.out.printf("%d\t", rolls[i]);
         System.out.println("\nIs this correct? y/n: ");
-        //TODO prompt the user if the wrong total number is entered.
+
         String userDone = input.next();
         if (userDone.equals("y"))
             return rolls;
