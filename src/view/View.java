@@ -123,7 +123,9 @@ public class View {
         double arithmeticMean = stats.arithmeticMean(); //for the evaluated dice
         System.out.printf("The expected value on the roll of these dice is %.2f\n", expectedValue);
         System.out.printf("The statistical average of your rolled dice is %.2f.\n", arithmeticMean);
-        System.out.printf("This is a difference of %.2f compared to completely fair dice.\n\n", (expectedValue - arithmeticMean));
+        System.out.printf("This is a difference of %.2f compared to completely fair dice.\n", (expectedValue - arithmeticMean));
+        System.out.printf("The most common roll was %d\n", stats.mostCommon());
+        System.out.printf("The least common roll was %d\n\n", stats.leastCommon());
         double uniformDeviation = stats.uniformDeviation();
         double sampleDeviation = stats.sampleDeviation();
         boolean swingy = sampleDeviation > uniformDeviation;

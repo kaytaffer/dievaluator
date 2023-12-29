@@ -25,8 +25,11 @@ public class Statistics {
         double sampleDeviation = Math.sqrt(sampleVariance);
         double offsetExpectedValue = Math.abs(arithmeticMean - uniformExpectedValue);
         double confidence = evaluateConfidence(totalDiceRolled, offsetExpectedValue, sampleDeviation);
+        int mostCommon = evaluateMostCommon(savedInput) + 1;
+        int leastCommon = evaluateLeastCommon(savedInput) + 1;
 
-        return new DiceStatisticsDTO(totalDiceRolled, uniformExpectedValue, uniformDeviation, arithmeticMean, sampleDeviation, confidence);
+        return new DiceStatisticsDTO(totalDiceRolled, uniformExpectedValue, uniformDeviation, arithmeticMean,
+                sampleDeviation, confidence, mostCommon, leastCommon);
     }
 
     //returns the expected value of a fair die (assuming uniform distribution)
@@ -79,5 +82,30 @@ public class Statistics {
         return 2 - 2 * percentageConfidence;
     }
 
+    //Finds the index that contains the highest value.
+    private static int evaluateMostCommon(int[] savedInput) {
+        int highest = Integer.MIN_VALUE;
+        int index = 0;
+        for(int i = 0; i < savedInput.length; i++) {
+            if (highest < savedInput[i]) {
+                highest = savedInput[i];
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    //Finds the index that contains the lowest value.
+    private static int evaluateLeastCommon(int[] savedInput) {
+        int lowest = Integer.MAX_VALUE;
+        int index = 0;
+        for(int i = 0; i < savedInput.length; i++) {
+            if (lowest > savedInput[i]) {
+                lowest = savedInput[i];
+                index = i;
+            }
+        }
+        return index;
+    }
     //TODO Hypothesis testing H_0 = mu = mean. Produce alpha (H0 rejected| H0 true) and beta(H0 rejected| H1 true).
 }
