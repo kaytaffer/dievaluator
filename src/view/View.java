@@ -43,6 +43,7 @@ public class View {
                 ++optionNumber + ". Start entirely new trial. \n" +
                 ++optionNumber + ". Exit.");
         int choice = input.nextInt();
+        input.nextLine();
         switch (choice) {
             case 1 -> {
                 int[] newThrow = numberOfEachFace(controller.howManySides(), controller.howManyDice());
@@ -51,6 +52,7 @@ public class View {
             case 2 -> showResults();
             case 3 -> controller.newTrial();
             case 4 -> {
+                System.out.println("Goodbye!");
                 return false;
             }
             default -> System.out.println("That was not a valid option.");
@@ -150,8 +152,8 @@ public class View {
         double fairnessConfidence = stats.confidence();
             System.out.printf("Samples will never be ideal, but according to the trials performed so far \n" +
                 "the probability that the dice in this trial are completely fair is approximately %.2f%%.", (fairnessConfidence * 100));
-        System.out.println("\nType \"y\" to proceed."); //TODO change to any key
-        input.next();
+        System.out.println("\nPress Enter to proceed.");
+        input.nextLine();
     }
 
     /**
