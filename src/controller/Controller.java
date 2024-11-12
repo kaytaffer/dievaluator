@@ -1,57 +1,40 @@
 package controller;
 import model.DiceStatisticsDTO;
 import model.Trial;
+import model.TrialObserver;
 import util.DiceLogger;
 import util.Statistics;
-import view.View;
+import view.ConsoleView;
 
 /**
  * This class passes data between the Model and View layers.
  */
 public class Controller {
 
-    View view;
     private Trial trial;
 
     /**
      * Creates an instance of a Controller
      */
     public Controller(){
-        view = new View(this);
-        trial = new Trial(view.howManyDice());
-    }
-
-    /**
-     * Continually asks <code>View</code> to prompt the user with their options.
-     */
-    public void runView() {
-        boolean viewRunning = true;
-        while(viewRunning)
-            viewRunning = view.showUserOptions();
     }
 
     /**
      * Starts a fresh <code>Trial</code> and sets it as the current one.
+     * @param numberOfDice The amount of dice thrown each time.
      */
-    public void newTrial() {
-        trial = new Trial(view.howManyDice());
+    public void newTrial(int numberOfDice, TrialObserver observer) {
+        this.trial = new Trial(numberOfDice);
+        this.trial.addObserver(observer);
     }
 
     /**
      * Tasks the <code>Trial</code> to record the results of a new dice throw.
-     * @param newThrow an array of ints representing amounts of dice results. Each index <code>i</code> should
+     * @param newThrow an array of integers representing amounts of dice results. Each index <code>i</code> should
      *                 correspond to the <code>i + 1</code>:th face of the die.
      */
     public void recordThrow(int[] newThrow) {
         trial.saveThrow(newThrow);
-    }
-
-    /**
-     * Fetches the amount dice in the <code>Trial</code>.
-     * @return the number of dice in the <code>Trial</code>.
-     */
-    public int howManyDice() {
-        return trial.getAmountOfDice();
     }
 
     /**
@@ -64,7 +47,7 @@ public class Controller {
 
     /**
      * Tasks the model to assemble statistics based on previous input.
-     * @return a <code>StatisticsDTO</code> containing the resulting mathematical output of a <code>Trial</code>.
+     * @return a <code>DiceStatisticsDTO</code> containing the resulting mathematical output of a <code>Trial</code>.
      */
     public DiceStatisticsDTO requestResults() {
         int[] savedInput = trial.getSavedInput();
@@ -72,12 +55,5 @@ public class Controller {
         logger.logDiceRolls(savedInput);
         logger.closeWriter();
         return Statistics.assembleStatistics(savedInput);
-    }
-
-    /**
-     * Orders the view to shut down.
-     */
-    public void shutdown() {
-        view.shutdown();
     }
 }

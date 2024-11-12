@@ -7,16 +7,18 @@ import java.util.Scanner;
 /**
  * A simple view to accept user input and present output in the terminal.
  */
-public class View {
+@Deprecated
+public class ConsoleView {
     private final Scanner input;
     private final Controller controller;
+    private int numberOfDice;
 
     /**
      * Creates an instance of the View UI.
      * @param controller a reference to the controller, in case user input needs to be passed to the program.
      *                   //TODO code to allow interrupts
      */
-    public View(Controller controller){
+    public ConsoleView(Controller controller){
         this.controller = controller;
         presentProgram();
         input = new Scanner(System.in);
@@ -28,7 +30,8 @@ public class View {
      */
     public int howManyDice() {
         System.out.println("How many dice are you rolling each time? ");
-        return input.nextInt();
+        this.numberOfDice = input.nextInt();
+        return numberOfDice;
     }
 
     /**
@@ -46,11 +49,11 @@ public class View {
         input.nextLine();
         switch (choice) {
             case 1 -> {
-                int[] newThrow = numberOfEachFace(controller.howManySides(), controller.howManyDice());
+                int[] newThrow = numberOfEachFace(controller.howManySides(), this.numberOfDice);
                 controller.recordThrow(newThrow);
             }
             case 2 -> showResults();
-            case 3 -> controller.newTrial();
+            case 3 -> controller.newTrial(howManyDice(), null);
             case 4 -> {
                 System.out.println("Goodbye!");
                 return false;
@@ -95,7 +98,7 @@ public class View {
 
     //presents the usage of the program to the user.
     private void presentProgram() {
-        System.out.print("""
+        System.out.println("""
                     _____________
                   /     o      / |
                  /___________ / o|

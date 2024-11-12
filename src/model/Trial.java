@@ -1,5 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+
+import util.Statistics;
+
 /**
  * Represents an ongoing trial to determine the fairness of a group of dice.
  */
@@ -8,6 +12,7 @@ public class Trial {
     private final int sidesOnDie = 6; //TODO option: allow for multiple types of dice beyond d6's through overloaded constructor
 
     private final int[] savedInput; //state of amount of each side of die rolled.
+    private final ArrayList<TrialObserver> observers;
 
     /**
      * Creates an instance of a dice trial.
@@ -16,6 +21,15 @@ public class Trial {
     public Trial(int amountOfDice) {
         this.amountOfDice = amountOfDice;
         this.savedInput = new int[sidesOnDie];
+        this.observers = new ArrayList<>();
+    }
+    
+    /**
+     * Adds an observer to this instance, to be notified when dice statistics change.
+     * @param observer The observer to be notified.
+     */
+    public void addObserver(TrialObserver observer) {
+    	this.observers.add(observer);
     }
 
     /**
@@ -26,6 +40,8 @@ public class Trial {
     public void saveThrow(int[] throwToSave) {
         for (int i = 0; i < sidesOnDie; i++)
             savedInput[i] = savedInput[i] + throwToSave[i];
+        for(TrialObserver observer : observers)
+        	observer.notifyObserversStatisticsAreUpdated(Statistics.assembleStatistics(savedInput));
     }
 
     /**
