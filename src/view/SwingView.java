@@ -13,9 +13,9 @@ import controller.Controller;
  */
 public class SwingView extends JFrame {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2210795984071771884L;
 	private final String APPLICATION_TITLE = "Dievaluator";
-	private final ImageIcon ICON = new ImageIcon("diecon.png");
+	private final ImageIcon ICON = new ImageIcon(SwingView.class.getResource("/resources/diecon.png"));
 	private final int MARGIN_WIDTH = 10; //pixel
 	
 	private InfoPanel infoPanel;
