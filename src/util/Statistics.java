@@ -54,12 +54,7 @@ public class Statistics {
         return sum / numOfElements;
     }
 
-    // Estimates the variance of the population using the supplied sample. If arithmetic mean already known
-    // the second of the overloaded methods can be used for faster performance.
-    private static double estimateVariance(int[] sample, int numberOfElements) {
-        double arithmeticMean = calculateArithmeticMean(sample, numberOfElements);
-        return estimateVariance(sample, numberOfElements, arithmeticMean);
-    }
+    // Estimates the variance of the population using the supplied sample.
     private static double estimateVariance(int[] sample, int numberOfElements, double arithmeticMean) {
         double numOfElements = numberOfElements * 1.0;
         double variance = 0.0;

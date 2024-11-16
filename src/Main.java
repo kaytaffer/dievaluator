@@ -1,5 +1,4 @@
 import controller.Controller;
-import view.ConsoleView;
 import view.SwingView;
 
 /**
@@ -14,9 +13,6 @@ public class Main {
     public static void main(String[] args) {
         //initialize
         Controller controller = new Controller();
-        ConsoleView consoleView = new ConsoleView(controller);
-        SwingView view = new SwingView(controller);
-        
-        consoleView.shutdown();
+        new SwingView(controller);
     }
 }

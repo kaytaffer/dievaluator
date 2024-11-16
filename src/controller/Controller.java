@@ -4,7 +4,6 @@ import model.Trial;
 import model.TrialObserver;
 import util.DiceLogger;
 import util.Statistics;
-import view.ConsoleView;
 
 /**
  * This class passes data between the Model and View layers.
