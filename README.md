@@ -2,6 +2,11 @@
 
 Dievaluator helps you decide if your favorite dice roll fairly.
 
+## Use
+Dievaluator.exe runs application and has a Java Swing GUI.
+
+## Project contents
+
 `Main` - Bootstraps application
 
 ### controller
